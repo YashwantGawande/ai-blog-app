@@ -3,6 +3,7 @@ import React from "react";
 import { Post as PostType } from "@prisma/client";
 import { FormattedPost } from "@/app/types";
 import Sidebar from "@/app/(shared)/Sidebar";
+import Content from "./Content";
 
 type Props = {
   params: { id: string };
@@ -29,12 +30,16 @@ const getPost = async (id: string) => {
 const Post = async ({ params }: Props) => {
   const { id } = params;
   const post: FormattedPost | null = await getPost(id);
-  console.log("post", post);
+
+  if (!post) {
+    return <div>Post Not Found</div>;
+  }
+  
   return (
     <main className="px-10 leading-7">
       <div className="gap-10 mb-5 md:flex">
         <div className="basis-3/4">
-          {/* <Content /> */}
+          <Content post={post} />
         </div>
         <div className="basis-1/4">
           <Sidebar />
