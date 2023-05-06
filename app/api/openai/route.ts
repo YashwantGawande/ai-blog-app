@@ -7,7 +7,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export async function POST(request: Request, response: any) {
+export async function POST(request: Request) {
   try {
     const { title, role } = await request.json();
 
@@ -17,7 +17,7 @@ export async function POST(request: Request, response: any) {
         messages: [
           {
             role: "user",
-            content: `create small blog post with html tags based on this title:${title}`,
+            content: `Create 3 line blog post with html tags based on this title: ${title}`,
           },
           {
             role: "system",
